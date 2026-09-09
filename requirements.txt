@@ -2,6 +2,9 @@ fastapi
 uvicorn[standard]
 google-cloud-secret-manager
 google-cloud-storage
+google-cloud-bigquery
+pandas-gbq
+db-dtypes
 pandas
 requests
 python-dotenv
