@@ -1,0 +1,19 @@
+name: Dependabot Triage
+
+on: pull_request
+
+permissions:
+  pull-requests: write
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+
+    steps:
+      - name: Assign PR to repo owner
+        run: gh pr edit "$PR_URL" --add-assignee "$REPO_OWNER"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

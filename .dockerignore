@@ -1,0 +1,13 @@
+.git
+.gitignore
+.github
+.env
+.venv
+env-*/
+__pycache__
+*.md
+setup.ps1
+deploy.ps1
+test/
+pyproject.toml
+.pre-commit-config.yaml

@@ -1,0 +1,64 @@
+[tool.ruff]
+# Exclui pastas que não devem ser analisadas
+exclude = [".git", ".mypy_cache", ".ruff_cache", ".venv", "__pypackages__", "build", "dist", "venv", "env-*"]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+# E/W/F: Padrões básicos (PEP8)
+# I: Isort (Organização de imports)
+# B: Bugbear (Evita bugs comuns)
+# D: Pydocstyle (Exige documentação/Docstrings)
+select = ["E", "W", "F", "I", "B", "D"]
+
+# Ignora erros específicos:
+# E501: Linha muito longa (o formatter resolve a maioria)
+# D100: Docstring em módulos públicos (evita excesso de burocracia)
+# D104: Docstring em __init__.py
+ignore = ["E501", "D100", "D104"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -v --cov=. --cov-report=term-missing"
+testpaths = ["tests", "test"]
+python_files = ["test_*.py", "*_test.py"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = false
+warn_unused_configs = true
+# Tipagem opcional por enquanto (para não travar o time)
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "semver"
+version_provider = "pep621"
+update_changelog_on_bump = true
+major_version_zero = true
+# Regras de commit conforme padrão Stalse
+allowed_prefixes = [
+    "feat",
+    "fix",
+    "docs",
+    "test",
+    "build",
+    "perf",
+    "style",
+    "refactor",
+    "ci",
+    "raw",
+    "cleanup",
+    "remove"
+]

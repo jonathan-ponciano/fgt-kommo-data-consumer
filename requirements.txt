@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+google-cloud-secret-manager
+google-cloud-storage
+pandas
+requests
+python-dotenv
+pytest
+pytest-cov
+pytest-sugar

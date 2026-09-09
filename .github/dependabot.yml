@@ -1,0 +1,63 @@
+version: 2
+
+updates:
+  # --- Dependências Python (pip / requirements.txt) ---
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "python"
+
+    groups:
+      # Dependências de produção agrupadas em 1 PR
+      production-dependencies:
+        patterns:
+          - "fastapi"
+          - "uvicorn*"
+          - "google-cloud-*"
+          - "pandas"
+          - "requests"
+          - "python-dotenv"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # Dependências de dev/test agrupadas em 1 PR separado
+      dev-dependencies:
+        patterns:
+          - "pytest*"
+          - "ruff"
+          - "mypy"
+          - "pre-commit"
+          - "commitizen"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # --- GitHub Actions ---
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+
+    groups:
+      # Todas as actions agrupadas em 1 PR
+      github-actions:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
